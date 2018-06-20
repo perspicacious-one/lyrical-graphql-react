@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
 import { Link } from 'react-router';
-import query from '../queries/fetchSongs';
+import query from '../queries/fetchSongs.js';
 
 class SongList extends Component {
   constructor(props) {
@@ -10,21 +10,19 @@ class SongList extends Component {
   }
 
   onDelete(id) {
-    this.props.mutate({
-      variables: { id: id },
-      refetchQueries: [{ query }]
-    });
+    this.props.mutate({ variables: { id: id }})
+      .then(() => this.props.data.refetch());
   }
   renderSongs() {
-    return this.props.data.songs.map(song => {
+    return this.props.data.songs.map(({ id, title }) => {
       return (
-        <li key={song.id} className="collection-item hoverable row">
-            <div className="col s10">
-              <h5>{song.title}</h5>
-            </div>
-            <div className="col s2">
-              <a className="btn-floating" href="#" onClick={this.onDelete.bind(this, song.id)}><i className="material-icons red">clear</i></a>
-            </div>
+        <li key={id} className="collection-item hoverable row">
+          <div className="col s10">
+            <Link to={`/songs/${id}`}><h5>{title}</h5></Link>
+          </div>
+          <div className="col s2">
+            <i onClick={this.onDelete.bind(this, id)} className="material-icons icon-red clickable">delete</i>
+          </div>
         </li>
       );
     })

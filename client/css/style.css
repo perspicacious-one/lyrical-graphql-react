@@ -4,3 +4,15 @@ body {
 #back-btn {
   margin-bottom: 20px;
 }
+.clickable {
+  cursor: pointer !important;
+  color: red;
+  margin: auto;
+  padding-top: 10px;
+}
+label {
+  font-size: 1.2rem;
+}
+.like {
+	cursor: pointer;
+}

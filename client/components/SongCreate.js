@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link, hashHistory } from 'react-router';
-import query from '../queries/fetchSongs';
+import query from '../queries/fetchSongs.js';
 
 class SongCreate extends Component {
   constructor(props) {
@@ -47,5 +47,5 @@ const mutation = gql`
       title
     }
   }
-`
+`;
 export default graphql(mutation)(SongCreate);
